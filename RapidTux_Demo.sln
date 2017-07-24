@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RapidTux_Demo", "RapidTux_Demo\RapidTux_Demo.csproj", "{93BAEECC-648E-48C3-BEBC-4F6E64013544}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Binaries", "Binaries", "{FF2D7373-3748-48FB-8C2A-B9BCA02FF195}"
+	ProjectSection(SolutionItems) = preProject
+		Binaries\RapidTux.ApiClient.dll = Binaries\RapidTux.ApiClient.dll
+		Binaries\RapidTux.ApiClient.pdb = Binaries\RapidTux.ApiClient.pdb
+		Binaries\RapidTux.ApiClient.XML = Binaries\RapidTux.ApiClient.XML
+		Binaries\RapidTux.Web.Shared.dll = Binaries\RapidTux.Web.Shared.dll
+		Binaries\RapidTux.Web.Shared.pdb = Binaries\RapidTux.Web.Shared.pdb
+		Binaries\RapidTux.Web.Shared.xml = Binaries\RapidTux.Web.Shared.xml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{93BAEECC-648E-48C3-BEBC-4F6E64013544}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93BAEECC-648E-48C3-BEBC-4F6E64013544}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93BAEECC-648E-48C3-BEBC-4F6E64013544}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93BAEECC-648E-48C3-BEBC-4F6E64013544}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

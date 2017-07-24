@@ -1,0 +1,389 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RapidTux.Web.Shared</name>
+    </assembly>
+    <members>
+        <member name="T:RapidTux.Web.Shared.APIResponse">
+            <summary>
+            All API methods return an APIResponse or a generic APIResponse &lt;T&gt;
+            The response has a HTP status code, an optional response string and in the generic case also a response value of type T
+            </summary>
+        </member>
+        <member name="M:RapidTux.Web.Shared.APIResponse.#ctor">
+            <summary>
+            Creates a new API response and sets it status code to OK (http 200).
+            </summary>
+        </member>
+        <member name="M:RapidTux.Web.Shared.APIResponse.#ctor(System.Net.HttpStatusCode)">
+            <summary>
+            Creates a new API response and sets it status code to the status supplied.
+            </summary>
+            <param name="statusCode"></param>
+        </member>
+        <member name="M:RapidTux.Web.Shared.APIResponse.#ctor(System.Net.HttpStatusCode,System.String)">
+            <summary>
+            Creates a new API response and sets it status code and response string to the supplied values.
+            </summary>
+            <param name="statusCode"></param>
+            <param name="responseString"></param>
+        </member>
+        <member name="P:RapidTux.Web.Shared.APIResponse.ResponseString">
+            <summary>
+            Gets or sets a response string, describing the result of the operation.
+            </summary>
+        </member>
+        <member name="P:RapidTux.Web.Shared.APIResponse.StatusCode">
+            <summary>
+            Gets or sets an http status code, describing the result of the operation.
+            </summary>
+        </member>
+        <member name="T:RapidTux.Web.Shared.APIResponse`1">
+            <summary>
+            All API methods return an APIResponse or a generic APIResponse &lt;T&gt;
+            The response has a HTP status code, an optional response string and in the generic case also a response value of type T
+            </summary>
+        </member>
+        <member name="M:RapidTux.Web.Shared.APIResponse`1.#ctor(System.Net.HttpStatusCode,System.String)">
+            <summary>
+            Creates a new API response and sets it status code and response string to the supplied values.
+            </summary>
+            <param name="statusCode"></param>
+            <param name="responseString"></param>
+        </member>
+        <member name="M:RapidTux.Web.Shared.APIResponse`1.#ctor(System.Net.HttpStatusCode,System.String,`0)">
+            <summary>
+            Creates a new API response and sets it status code, response string and value to the supplied values.
+            </summary>
+            <param name="statusCode"></param>
+            <param name="responseString"></param>
+            <param name="value"></param>
+        </member>
+        <member name="P:RapidTux.Web.Shared.APIResponse`1.Value">
+            <summary>
+            Gets o set the value to return as a response to the requested operation.
+            </summary>
+        </member>
+        <member name="T:RapidTux.Web.Shared.Criteria">
+            <summary>
+            A search criteria that can be used when getting a list of objects that matches the criteria
+            </summary>
+        </member>
+        <member name="F:RapidTux.Web.Shared.Criteria.CriteriaCollectionJsonName">
+            <summary>
+            Used in options JObject passed to data controller list method, to define the token name of a criteria collection.
+            </summary>
+        </member>
+        <member name="P:RapidTux.Web.Shared.Criteria.Path">
+            <summary>
+            The relative path to a property on the searched object.
+            E.g.: 
+            Age (where age is a property of e.g. a Person.Age as an integer property)
+            Address.Street (where Person.Address is a nested object and Person.Address.Street is a string property)
+            </summary>
+        </member>
+        <member name="P:RapidTux.Web.Shared.Criteria.Value">
+            <summary>
+            The value to match the relative Path to.
+            </summary>
+        </member>
+        <member name="P:RapidTux.Web.Shared.Criteria.ValueList">
+            <summary>
+            The list of values to use in an 'In' criteria e.g.
+            </summary>
+        </member>
+        <member name="P:RapidTux.Web.Shared.Criteria.MatchType">
+            <summary>
+            How to match the value and the value at path.
+            </summary>
+        </member>
+        <member name="T:RapidTux.Web.Shared.CriteriaTypeEnum">
+            <summary>
+            Different types of match options.
+            </summary>
+        </member>
+        <member name="T:RapidTux.Web.Shared.DataCollection">
+            <summary>
+            A wrapper for a collection of data instances.
+            </summary>
+        </member>
+        <member name="M:RapidTux.Web.Shared.DataCollection.#ctor(System.String,System.Collections.Generic.IEnumerable{Newtonsoft.Json.Linq.JObject})">
+            <summary>
+            Initialising constructor.
+            </summary>
+            <param name="name"></param>
+            <param name="data"></param>
+        </member>
+        <member name="P:RapidTux.Web.Shared.DataCollection.Name">
+            <summary>
+            Name of object
+            </summary>
+        </member>
+        <member name="P:RapidTux.Web.Shared.DataCollection.Data">
+            <summary>
+            A collection of data objects
+            </summary>
+        </member>
+        <member name="T:RapidTux.Web.Shared.DataType">
+            <summary>
+            Type information for a data type
+            </summary>
+        </member>
+        <member name="T:RapidTux.Web.Shared.IDataType">
+            <summary>
+            Type information for a data type
+            </summary>
+        </member>
+        <member name="P:RapidTux.Web.Shared.IDataType.Name">
+            <summary>
+            Name of type
+            </summary>
+        </member>
+        <member name="P:RapidTux.Web.Shared.IDataType.TypeInfo">
+            <summary>
+            Template data for data type
+            </summary>
+        </member>
+        <member name="M:RapidTux.Web.Shared.DataType.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="M:RapidTux.Web.Shared.DataType.#ctor(System.String,Newtonsoft.Json.Linq.JObject)">
+            <summary>
+            Initialising constructor.
+            </summary>
+            <param name="name"></param>
+            <param name="typeInfo"></param>
+        </member>
+        <member name="P:RapidTux.Web.Shared.DataType.Name">
+            <summary>
+            Name of object
+            </summary>
+        </member>
+        <member name="P:RapidTux.Web.Shared.DataType.TypeInfo">
+            <summary>
+            Template data for object
+            </summary>
+        </member>
+        <member name="T:RapidTux.Web.Shared.DataTypeCollection">
+            <summary>
+            A wrapper for a collections of data types.
+            </summary>
+        </member>
+        <member name="P:RapidTux.Web.Shared.DataTypeCollection.Types">
+            <summary>
+            A collection of data types.
+            </summary>
+        </member>
+        <member name="T:RapidTux.Web.Shared.IFile">
+            <summary>
+            Contains file info and the file itself.
+            the file can be represented as a byte array or a stream
+            </summary>
+        </member>
+        <member name="P:RapidTux.Web.Shared.IFile.FileInfo">
+            <summary>
+            Contains filename, id and metadata for the file.
+            </summary>
+        </member>
+        <member name="P:RapidTux.Web.Shared.IFile.FileBytes">
+            <summary>
+            The actual file bytes
+            </summary>
+        </member>
+        <member name="P:RapidTux.Web.Shared.IFile.FileStream">
+            <summary>
+            not implemented
+            </summary>
+        </member>
+        <member name="T:RapidTux.Web.Shared.IFileInfo">
+            <summary>
+            Informational part of the file.
+            Contains filename, id and metadata for the file.
+            </summary>
+        </member>
+        <member name="P:RapidTux.Web.Shared.IFileInfo.FileName">
+            <summary>
+            file name, must be unique otherwise file is overwritten
+            </summary>
+        </member>
+        <member name="T:RapidTux.Web.Shared.ITypeBuilder">
+            <summary>
+            A fluent interface for building and changing types defined by IDataType.
+            e.g. new TypeBuilder().AddProperty().AddProperty.Result
+            </summary>
+        </member>
+        <member name="M:RapidTux.Web.Shared.ITypeBuilder.AddArrayOfBoolProperty(System.String)">
+            <summary>
+            Adds a new property with he supplied name, of type array of bool.
+            </summary>
+            <param name="propertyName">The name of the new property.</param>
+            <returns>Returns the typebuilder</returns>
+        </member>
+        <member name="M:RapidTux.Web.Shared.ITypeBuilder.AddStringProperty(System.String,System.String)">
+            <summary>
+            Adds a new property with he supplied name, of type string.
+            </summary>
+            <param name="propertyName">The name of the new property.</param>
+            <param name="defaultValue">Optionally sets a default value of this property, to use when creating instances of this type.</param>
+            <returns>Returns the typebuilder</returns>
+        </member>
+        <member name="M:RapidTux.Web.Shared.ITypeBuilder.ResultWithName(System.String)">
+            <summary>
+            Returns the type info for the type that was build, and sets the type name.
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="P:RapidTux.Web.Shared.ITypeBuilder.New">
+            <summary>
+            Creates a new type instance to work on.
+            </summary>
+        </member>
+        <member name="P:RapidTux.Web.Shared.ITypeBuilder.Result">
+            <summary>
+            Returns the template for the type that was build without specifying a name for the type
+            </summary>
+        </member>
+        <member name="M:RapidTux.Web.Shared.MimeMapper.GetMimeType(System.String)">
+            <summary>
+            Gets the mime type associated with the file extension.
+            </summary>
+            <param name="extension">file extenson with or without the dot (.)</param>
+            <returns>Returns the associated mime type</returns>
+        </member>
+        <member name="T:RapidTux.Web.Shared.ObjectPath">
+            <summary>
+            Defines a relative path to a nested object.
+            e.g. given a school object, the nested path could be: teachers.classes
+            to get all classes objects of all teachers of the school. The school object is implied and the path is relative to it.
+            Or: budget.2016 to get the school budget object for 2016
+            </summary>
+        </member>
+        <member name="P:RapidTux.Web.Shared.ObjectPath.Path">
+            <summary>
+            A relative path to a nested object.
+            e.g. given a school object, the nested path could be: teachers.classes
+            to get all classes objects of all teachers of the school. The school object is implied and the path is relative to it.
+            Or: budget.2016 to get the school budget object for 2016
+            </summary>
+        </member>
+        <member name="T:RapidTux.Web.Shared.QueryStringTokens">
+            <summary>
+            Defines available tokens for use in querystrings when communicating with the REST api.
+            </summary>
+        </member>
+        <member name="F:RapidTux.Web.Shared.QueryStringTokens.LogicalCriteriaToken">
+            <summary>
+            Defines whether criterias should be executed as logical AND or Logical OR.
+            </summary>
+        </member>
+        <member name="T:RapidTux.Web.Shared.SearchOptions">
+            <summary>
+            Construction of search options and translator to json options.
+            todo: add sort to the options object
+            </summary>
+        </member>
+        <member name="M:RapidTux.Web.Shared.SearchOptions.ToJsonOptions">
+            <summary>
+            Return the options as json to pass along to the REST api.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:RapidTux.Web.Shared.SearchOptions.IsAndCriterias">
+            <summary>
+            If true, will 'and' all criterias together.
+            If false, will 'or' all criteris together.
+            Default is all as 'or'
+            </summary>
+        </member>
+        <member name="P:RapidTux.Web.Shared.SearchOptions.Limit">
+            <summary>
+            Limit result set to a certain number of items.
+            </summary>
+        </member>
+        <member name="P:RapidTux.Web.Shared.SearchOptions.Skip">
+            <summary>
+            Skip x number of items from the result set.
+            </summary>
+        </member>
+        <member name="P:RapidTux.Web.Shared.SearchOptions.Criterias">
+            <summary>
+            A list of criterias to match when querying for the data.
+            </summary>
+        </member>
+        <member name="F:RapidTux.Web.Shared.Headers.FileCustomMetaDataHeaderPrefix">
+            <summary>
+            This header prefix can be used combined with a custom metadata key name appended, to be set multiple times in the http Request header,
+            to allow the client to set custom metadata on a file.
+            </summary>
+        </member>
+        <member name="F:RapidTux.Web.Shared.Headers.FileCustomMetaDataHeaderMaxLength">
+            <summary>
+            Max length of the client supplied key name used for a custom metadata header
+            </summary>
+        </member>
+        <member name="F:RapidTux.Web.Shared.Headers.FileCustomMetaDataHeaderValueMaxLength">
+            <summary>
+            Max length of the client supplied value for a custom metadata header
+            </summary>
+        </member>
+        <member name="T:RapidTux.Web.Shared.TypeBuilder">
+            <summary>
+             A fluent interface for building and changing types defined by IDataType.
+            e.g. new TypeBuilder().AddProperty().AddProperty.Result
+            </summary>
+        </member>
+        <member name="M:RapidTux.Web.Shared.TypeBuilder.ResultWithName(System.String)">
+            <summary>
+            Returns the build data type as an IDataType and names the datatype with name.
+            </summary>
+            <param name="name">Name to give to the datatype.</param>
+            <returns>Returns the build data type.</returns>
+        </member>
+        <member name="M:RapidTux.Web.Shared.TypeBuilder.AddStringProperty(System.String,System.String)">
+            <summary>
+            Adds a property of type string.
+            </summary>
+            <param name="propertyName">Name of property.</param>
+            <param name="defaultValue">Default value of property when creating its parent object.</param>
+            <returns>Returns the current type builder instance with the newly added property.</returns>
+        </member>
+        <member name="M:RapidTux.Web.Shared.TypeBuilder.AddObjectProperty(System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Adds a property of type object.
+            </summary>
+            <param name="propertyName">Name of property.</param>
+            <param name="objectName">Name of object type of property.</param>
+            <param name="withCreate">True to create an instance of the object for the property when creating its parent object, otherwise false.</param>
+            <param name="asArray">Create the property as an array of objects if true, otherwise false.</param>
+            <returns>Returns the current type builder instance with the newly added property.</returns>
+        </member>
+        <member name="P:RapidTux.Web.Shared.TypeBuilder.New">
+            <summary>
+            Resets the type builder and creates a completely new type
+            </summary>
+        </member>
+        <member name="M:RapidTux.Web.Shared.TypeMarkers.GetMarkerForObject(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Gets a property marker for an object property.
+            The property can be an object or an array of objects and can also be marked with create, if its not an array.
+            e.g. __ArrayOf;OrderLine
+            e.g. __Object;SalesInfo;Create
+            </summary>
+            <param name="objectName"></param>
+            <param name="withCreate"></param>
+            <param name="asArrray"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RapidTux.Web.Shared.TypeMarkers.GetMarkerForSimpleArray(System.String)">
+            <summary>
+            Gets a property marker for an array of a simple type.
+            e.g. __ArrayOf;_boolean
+            </summary>
+            <param name="typeTokenConstant">a simple type constant as defined in this class</param>
+            <returns>the marker or throws ArgumentException if typeTokenConstant is not recognized.</returns>
+        </member>
+    </members>
+</doc>

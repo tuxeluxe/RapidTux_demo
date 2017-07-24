@@ -1,0 +1,414 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RapidTux.ApiClient</name>
+    </assembly>
+    <members>
+        <member name="T:RapidTux.ApiClient.IConfigAPI">
+            <summary>
+            A Configuration API, for access to a built in configuration system.
+            The client can use this api to store and retrieve custom configuration settings.
+            </summary>
+        </member>
+        <member name="T:RapidTux.ApiClient.IDataAPI">
+            <summary>
+            API for managing data instances of types defined by the Type API.
+            </summary>
+        </member>
+        <member name="M:RapidTux.ApiClient.IDataAPI.List(System.String)">
+            <summary>
+            Returns a list of data matching the typename and the options provided.
+            </summary>
+            <param name="typeName">The name of the object type.</param>
+            <returns>A data collection object wrapping a list of data found.</returns>
+        </member>
+        <member name="M:RapidTux.ApiClient.IDataAPI.ListAsync(System.String)">
+            <summary>
+            Returns a list of data matching the typename and the options provided.
+            </summary>
+            <param name="typeName">The name of the object type.</param>
+            <returns>A data collection object wrapping a list of data found.</returns>
+        </member>
+        <member name="M:RapidTux.ApiClient.IDataAPI.List(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Returns a list of data matching the typename and the options provided.
+            </summary>
+            <param name="typeName">The name of the object type.</param>
+            <param name="limit">Optional parameter to limit the returned result set.</param>
+            <param name="skip">Optional parameter to skip x number of data items from the result set.</param>
+            <returns>A data collection object wrapping a list of data found.</returns>
+        </member>
+        <member name="M:RapidTux.ApiClient.IDataAPI.ListAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Returns a list of data matching the typename and the options provided.
+            </summary>
+            <param name="typeName">The name of the object type.</param>
+            <param name="limit">Optional parameter to limit the returned result set.</param>
+            <param name="skip">Optional parameter to skip x number of data items from the result set.</param>
+            <returns>A data collection object wrapping a list of data found.</returns>
+        </member>
+        <member name="M:RapidTux.ApiClient.IDataAPI.List(System.String,Newtonsoft.Json.Linq.JObject)">
+            <summary>
+            Returns a list of data matching the typename and the options provided.
+            </summary>
+            <param name="typeName">The name of the object type.</param>
+            <param name="options">
+            A json options object defining how to query for the data.
+            This includes setting multiple criterias, sorting, limit, and skip.
+            See <see cref="T:RapidTux.Web.Shared.QueryStringTokens"/> and <see cref="T:RapidTux.Web.Shared.Criteria"/> for available tokens.
+            See <see cref="T:RapidTux.Web.Shared.LogicalCriteriaContants"/> for constants
+            E.g. 
+            JObject options = new JObject();
+            options[QueryStringTokens.LimitToken] = 20;
+            Criteria c1 = new Criteria("name", new JValue("Benny"), CriteriaTypeEnum.EQ);
+            Criteria c2 = new Criteria("name", new JArray("Benny", "Johnny", "Melissa"), CriteriaTypeEnum.In);
+            Criteria[] crits = new Criteria[] { c1, c2 };
+            options[QueryStringTokens.LogicalCriteriaToken] = LogicalCriteriaContants.LogicalAnd;
+            options[Criteria.CriteriaCollectionJsonName] = Criteria.ToJObject(crits);
+            </param>
+            <returns>A data collection object wrapping a list of data found.</returns>
+        </member>
+        <member name="M:RapidTux.ApiClient.IDataAPI.ListAsync(System.String,Newtonsoft.Json.Linq.JObject)">
+            <summary>
+            Returns a list of data matching the typename and the options provided.
+            </summary>
+            <param name="typeName">The name of the object type.</param>
+            <param name="options">
+            A json options object defining how to query for the data.
+            This includes setting multiple criterias, sorting, limit, and skip.
+            See <see cref="T:RapidTux.Web.Shared.QueryStringTokens"/> and <see cref="T:RapidTux.Web.Shared.Criteria"/> for available tokens.
+            See <see cref="T:RapidTux.Web.Shared.LogicalCriteriaContants"/> for constants
+            E.g. 
+            JObject options = new JObject();
+            options[QueryStringTokens.LimitToken] = 20;
+            Criteria c1 = new Criteria("name", new JValue("Benny"), CriteriaTypeEnum.EQ);
+            Criteria c2 = new Criteria("name", new JArray("Benny", "Johnny", "Melissa"), CriteriaTypeEnum.In);
+            Criteria[] crits = new Criteria[] { c1, c2 };
+            options[QueryStringTokens.LogicalCriteriaToken] = LogicalCriteriaContants.LogicalAnd;
+            options[Criteria.CriteriaCollectionJsonName] = Criteria.ToJObject(crits);
+            </param>
+            <returns>A data collection object wrapping a list of data found.</returns>
+        </member>
+        <member name="M:RapidTux.ApiClient.IDataAPI.List(System.String,RapidTux.Web.Shared.SearchOptions)">
+            <summary>
+            Returns a list of data matching the typename and the criteria in te search options provided.
+            </summary>
+            <param name="typeName">The name of the object type.</param>
+            <param name="options">A SearchOptions object defining the criterias of the search.</param>
+            <returns>A data collection object wrapping a list of data found.</returns>
+        </member>
+        <member name="M:RapidTux.ApiClient.IDataAPI.ListAsync(System.String,RapidTux.Web.Shared.SearchOptions)">
+            <summary>
+            Returns a list of data matching the typename limited by any criterias and limit or skip options.
+            </summary>
+            <param name="typeName">The name of the object type.</param>
+            <param name="options">A SearchOptions object defining the criterias of the search.</param>
+            <returns>A data collection object wrapping a list of data found.</returns>
+        </member>
+        <member name="M:RapidTux.ApiClient.IDataAPI.Create(System.String)">
+            <summary>
+            Creates a new instance of a given type, does not save the new instance.
+            Use Save for object persisting.
+            </summary>
+            <param name="typeName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RapidTux.ApiClient.IDataAPI.CreateAsync(System.String)">
+            <summary>
+            Creates a new instance of a given type, does not save the new instance.
+            Use Save for object persisting.
+            </summary>
+            <param name="typeName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RapidTux.ApiClient.IDataAPI.DeleteAll(System.String)">
+            <summary>
+            v1/data/sometypename/delete/all
+            Deletes all data of a given type.
+            </summary>
+            <param name="typeName">a typename registered in the type system.</param>
+            <returns>Retuns an APIResponse object describing the result of the operation.</returns>
+        </member>
+        <member name="M:RapidTux.ApiClient.DataAPI.List(System.String)">
+            <summary>
+            Returns a list of data matching the typename and the options provided.
+            </summary>
+            <param name="typeName">The name of the object type.</param>
+            <returns>A data collection object wrapping a list of data found.</returns>
+        </member>
+        <member name="M:RapidTux.ApiClient.DataAPI.ListAsync(System.String)">
+            <summary>
+            Returns a list of data matching the typename and the options provided.
+            </summary>
+            <param name="typeName">The name of the object type.</param>
+            <returns>A data collection object wrapping a list of data found.</returns>
+        </member>
+        <member name="M:RapidTux.ApiClient.DataAPI.List(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Returns a list of data matching the typename and the options provided.
+            </summary>
+            <param name="typeName">The name of the object type.</param>
+            <param name="limit">Optional parameter to limit the returned result set.</param>
+            <param name="skip">Optional parameter to skip x number of data items from the result set.</param>
+            <returns>A data collection object wrapping a list of data found.</returns>
+        </member>
+        <member name="M:RapidTux.ApiClient.DataAPI.ListAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Returns a list of data matching the typename and the options provided.
+            </summary>
+            <param name="typeName">The name of the object type.</param>
+            <param name="limit">Optional parameter to limit the returned result set.</param>
+            <param name="skip">Optional parameter to skip x number of data items from the result set.</param>
+            <returns>A data collection object wrapping a list of data found.</returns>
+        </member>
+        <member name="M:RapidTux.ApiClient.DataAPI.List(System.String,Newtonsoft.Json.Linq.JObject)">
+            <summary>
+            Returns a list of data matching the typename and the options provided.
+            </summary>
+            <param name="typeName">The name of the object type.</param>
+            <param name="options">
+            A json options object defining how to query for the data.
+            This includes setting multiple criterias, sorting, limit, and skip.
+            See <see cref="T:RapidTux.Web.Shared.QueryStringTokens"/> and <see cref="T:RapidTux.Web.Shared.Criteria"/> for available tokens.
+            See <see cref="T:RapidTux.Web.Shared.LogicalCriteriaContants"/> for constants
+            E.g. 
+            JObject options = new JObject();
+            options[QueryStringTokens.LimitToken] = 20;
+            Criteria c1 = new Criteria("name", new JValue("Benny"), CriteriaTypeEnum.EQ);
+            Criteria c2 = new Criteria("name", new JArray("Benny", "Johnny", "Melissa"), CriteriaTypeEnum.In);
+            Criteria[] crits = new Criteria[] { c1, c2 };
+            options[QueryStringTokens.LogicalCriteriaToken] = LogicalCriteriaContants.LogicalAnd;
+            options[Criteria.CriteriaCollectionJsonName] = Criteria.ToJObject(crits);
+            </param>
+            <returns>A data collection object wrapping a list of data found.</returns>
+        </member>
+        <member name="M:RapidTux.ApiClient.DataAPI.ListAsync(System.String,Newtonsoft.Json.Linq.JObject)">
+            <summary>
+            Returns a list of data matching the typename and the options provided.
+            </summary>
+            <param name="typeName">The name of the object type.</param>
+            <param name="options">
+            A json options object defining how to query for the data.
+            This includes setting multiple criterias, sorting, limit, and skip.
+            See <see cref="T:RapidTux.Web.Shared.QueryStringTokens"/> and <see cref="T:RapidTux.Web.Shared.Criteria"/> for available tokens.
+            See <see cref="T:RapidTux.Web.Shared.LogicalCriteriaContants"/> for constants
+            E.g. 
+            JObject options = new JObject();
+            options[QueryStringTokens.LimitToken] = 20;
+            Criteria c1 = new Criteria("name", new JValue("Benny"), CriteriaTypeEnum.EQ);
+            Criteria c2 = new Criteria("name", new JArray("Benny", "Johnny", "Melissa"), CriteriaTypeEnum.In);
+            Criteria[] crits = new Criteria[] { c1, c2 };
+            options[QueryStringTokens.LogicalCriteriaToken] = LogicalCriteriaContants.LogicalAnd;
+            options[Criteria.CriteriaCollectionJsonName] = Criteria.ToJObject(crits);
+            </param>
+            <returns>A data collection object wrapping a list of data found.</returns>
+        </member>
+        <member name="M:RapidTux.ApiClient.DataAPI.List(System.String,RapidTux.Web.Shared.SearchOptions)">
+            <summary>
+            Returns a list of data matching the typename and the criteria in te search options provided.
+            </summary>
+            <param name="typeName">The name of the object type.</param>
+            <param name="options">A SearchOptions object defining the criterias of the search.</param>
+            <returns>A data collection object wrapping a list of data found.</returns>
+        </member>
+        <member name="M:RapidTux.ApiClient.DataAPI.ListAsync(System.String,RapidTux.Web.Shared.SearchOptions)">
+            <summary>
+            Returns a list of data matching the typename and the criteria in te search options provided.
+            </summary>
+            <param name="typeName">The name of the object type.</param>
+            <param name="options">A SearchOptions object defining the criterias of the search.</param>
+            <returns>A data collection object wrapping a list of data found.</returns>
+        </member>
+        <member name="M:RapidTux.ApiClient.DataAPI.DeleteAll(System.String)">
+            <summary>
+            v1/data/sometypename/delete/all
+            Deletes all data of a given type.
+            </summary>
+            <param name="typeName">a typename registered in the type system.</param>
+            <returns>Retuns an APIResponse object describing the result of the operation.</returns>
+        </member>
+        <member name="T:RapidTux.ApiClient.IFileAPI">
+            <summary>
+            A File API for uploading and downloading any byte stream and associated metadata.
+            </summary>
+        </member>
+        <member name="M:RapidTux.ApiClient.IFileAPI.Upload(System.String,System.String,System.String,System.Byte[])">
+            <summary>
+            Uploads a file in one go taking the complete bytesof the file as an argument.
+            </summary>
+            <param name="bucketName">the bucket to put the file in</param>
+            <param name="fileName">the unique file name of the file</param>
+            <param name="fileBytes">the files content as a byte array</param>
+            <returns>Returns an APIResponse object describing the http response code</returns>
+        </member>
+        <member name="M:RapidTux.ApiClient.IFileAPI.Upload(System.String,System.String,System.String,System.Byte[],System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            v1/file/upload/bucketname/fileName
+            Uploads a file in one go taking the complete bytesof the file as an argument.
+            </summary>
+            <param name="bucketName">the bucket to put the file in</param>
+            <param name="fileName">the unique file name of the file</param>
+            <param name="fileBytes">the files content as a byte array</param>
+            <param name="metaData">an optional custom metadata dictionary, that will be set as custom http request headers</param>
+            <returns>Returns an APIResponse object describing the http response code</returns>
+        </member>
+        <member name="M:RapidTux.ApiClient.IFileAPI.Delete(System.String,System.String)">
+            <summary>
+            Delete a single file.
+            </summary>
+            <param name="bucketName">The unique file name of the file</param>
+            <param name="fileName">The unique file name of the file</param>
+            <returns>Return a standard api response with no extra data.</returns>
+        </member>
+        <member name="M:RapidTux.ApiClient.FileAPI.FileExist(System.String,System.String)">
+            <summary>
+            v1/file/exist/bucketname/fileName
+            </summary>
+            <param name="bucketName">The bucket where the file is located</param>
+            <param name="fileName">The unique file name of the file</param>
+            <returns></returns>
+        </member>
+        <member name="M:RapidTux.ApiClient.FileAPI.Delete(System.String,System.String)">
+            <summary>
+            Delete a single file.
+            </summary>
+            <param name="bucketName">The unique file name of the file</param>
+            <param name="fileName">The unique file name of the file</param>
+            <returns>Return a standard api response with no extra data.</returns>
+        </member>
+        <member name="M:RapidTux.ApiClient.FileAPI.Upload(System.String,System.String,System.String,System.Byte[])">
+            <summary>
+            v1/file/upload/bucketname/fileName
+            Uploads a file in one go taking the complete bytesof the file as an argument.
+            </summary>
+            <param name="bucketName">the bucket to put the file in</param>
+            <param name="fileName">the unique file name of the file</param>
+            <param name="fileBytes">the files content as a byte array</param>
+            <returns>Returns an APIResponse object describing the http response code</returns>
+        </member>
+        <member name="M:RapidTux.ApiClient.FileAPI.Upload(System.String,System.String,System.String,System.Byte[],System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            v1/file/upload/bucketname/fileName
+            Uploads a file in one go taking the complete bytesof the file as an argument.
+            </summary>
+            <param name="bucketName">the bucket to put the file in</param>
+            <param name="fileName">the unique file name of the file</param>
+            <param name="fileBytes">the files content as a byte array</param>
+            <param name="metaData">an optional custom metadata dictionary, that will be set as custom http request headers</param>
+            <returns>Returns an APIResponse object describing the http response code and the uploaded file.</returns>
+        </member>
+        <member name="M:RapidTux.ApiClient.FileAPI.Download(System.String,System.String)">
+            <summary>
+            v1/file/download/bucketname/fileName
+            </summary>
+            <param name="bucketName"></param>
+            <param name="fileName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RapidTux.ApiClient.FileAPI.FormatMetaDataAsHeaders(System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Adds header prefix to custom metadata keys
+            </summary>
+            <param name="metaData"></param>
+            <returns></returns>
+        </member>
+        <member name="T:RapidTux.ApiClient.IRapidTuxApiClient">
+            <summary>
+            A client for accessing the different apis such as, types, data, files and configuration.
+            </summary>
+        </member>
+        <member name="P:RapidTux.ApiClient.IRapidTuxApiClient.DataAPI">
+            <summary>
+            API for managing data instances of types defined by the Type API.
+            </summary>
+        </member>
+        <member name="P:RapidTux.ApiClient.IRapidTuxApiClient.TypeAPI">
+            <summary>
+            An API for the type system.
+            </summary>
+        </member>
+        <member name="P:RapidTux.ApiClient.IRapidTuxApiClient.ConfigAPI">
+            <summary>
+            A Configuration API, for access to a built in configuration system.
+            The client can use this api to store and retrieve custom configuration settings.
+            </summary>
+        </member>
+        <member name="P:RapidTux.ApiClient.IRapidTuxApiClient.FileAPI">
+            <summary>
+            An API for uploading and downloading any byte stream and associated metadata.
+            </summary>
+        </member>
+        <member name="T:RapidTux.ApiClient.ITypeAPI">
+            <summary>
+            An API for the type system.
+            </summary>
+        </member>
+        <member name="M:RapidTux.ApiClient.RequestMakerFactory.Create(System.String,System.String)">
+            <summary>
+            Creates an instace of RequestMakerGeneric, and sets default tux api http headers for api id and user id
+            </summary>
+            <param name="apiId"></param>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RapidTux.ApiClient.RequestMakerGeneric.UploadFile(System.Uri,System.String,System.String,System.IO.MemoryStream,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Uploads a file using the rest file api.
+            On success returns an api response containing the file id.
+            </summary>
+            <param name="uri"></param>
+            <param name="fileName"></param>
+            <param name="contentType"></param>
+            <param name="file"></param>
+            <param name="metaData"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RapidTux.ApiClient.RequestMakerGeneric.ExtractMetaDataFromResponse(System.Net.Http.HttpResponseMessage)">
+            <summary>
+            Extracts custom metadata from a response message, and returns it as key value pairs as a json object.
+            </summary>
+            <param name="resp"></param>
+            <returns></returns>
+        </member>
+        <member name="T:RapidTux.ApiClient.RapidTuxApiClient">
+            <summary>
+            A client for accessing the different apis such as, types, data, files and configuration.
+            </summary>
+        </member>
+        <member name="F:RapidTux.ApiClient.RapidTuxApiClient.Version">
+            <summary>
+            Version number of this client.
+            </summary>
+        </member>
+        <member name="M:RapidTux.ApiClient.RapidTuxApiClient.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="restApiUrl"></param>
+            <param name="apiId"></param>
+            <param name="userId"></param>
+        </member>
+        <member name="P:RapidTux.ApiClient.RapidTuxApiClient.TypeAPI">
+            <summary>
+            An API for the type system.
+            Use RapidTux.Web.Shared.TypeBuilder to easily build new types.
+            </summary>
+        </member>
+        <member name="P:RapidTux.ApiClient.RapidTuxApiClient.DataAPI">
+            <summary>
+            API for managing data instances of types defined by the Type API.
+            </summary>
+        </member>
+        <member name="P:RapidTux.ApiClient.RapidTuxApiClient.ConfigAPI">
+            <summary>
+            A Configuration API, for access to a built in configuration system.
+            The client can use this api to store and retrieve custom configuration settings.
+            </summary>
+        </member>
+        <member name="P:RapidTux.ApiClient.RapidTuxApiClient.FileAPI">
+            <summary>
+            An API for uploading and downloading any byte stream and associated metadata.
+            </summary>
+        </member>
+    </members>
+</doc>
