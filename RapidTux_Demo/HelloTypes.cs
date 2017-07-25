@@ -42,5 +42,12 @@ namespace RapidTux_Demo
             foreach(DataType dataType in resp.Value.Types)
                 Debug.WriteLine(dataType.Name + Environment.NewLine + dataType.TypeInfo.ToString() + Environment.NewLine);
         }
+
+        [TestMethod]
+        public void DeleteType()
+        {
+            RapidTuxApiClient client = new RapidTuxApiClient(TestConfig.SvcUrl, TestConfig.APIID, "ex_tt");
+            client.TypeAPI.Delete(Person.PersonTypeName);
+        }
     }
 }

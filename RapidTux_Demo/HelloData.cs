@@ -11,7 +11,22 @@ namespace RapidTux_Demo
     public class HelloData
     {
         [TestMethod]
-        public void CreatePerson()
+        public void ListPersons()
+        {
+            RapidTuxApiClient client = new RapidTuxApiClient(TestConfig.SvcUrl, TestConfig.APIID, "ex_tt");
+            var persons = client.DataAPI.List(Person.PersonTypeName).Value.Data;
+        }
+
+        [TestMethod]
+        public void SearchPersons()
+        {
+            RapidTuxApiClient client = new RapidTuxApiClient(TestConfig.SvcUrl, TestConfig.APIID, "ex_tt");
+            var search = SearchOptions.Instance.AddCriteria("navn", "Mogensen", CriteriaTypeEnum.Contains);
+            var persons = client.DataAPI.List(Person.PersonTypeName, search).Value.Data;
+        }
+
+        [TestMethod]
+        public void CreatePersons()
         {
             RapidTuxApiClient client = new RapidTuxApiClient(TestConfig.SvcUrl, TestConfig.APIID, "ex_tt");
             
@@ -25,28 +40,25 @@ namespace RapidTux_Demo
             spouse[Person.ErÆgtefælleProperty] = true;
             ((JArray)person[Person.RelationerProperty]).Add(spouse);
 
+            var halfdan = client.DataAPI.Create(Person.PersonTypeName).Value;
+            halfdan[Person.NavnProperty] = "Halfdan Rasmussen";
+
             var resp = client.DataAPI.Save(Person.PersonTypeName, person);
+            resp = client.DataAPI.Save(Person.PersonTypeName, halfdan);
         }
 
         [TestMethod]
-        public void ListData()
-        {
-            RapidTuxApiClient client = new RapidTuxApiClient(TestConfig.SvcUrl, TestConfig.APIID, "ex_tt");
-            var resp = client.DataAPI.List(Person.PersonTypeName);
-        }
-
-        [TestMethod]
-        public void ListData_with_limit_skip()
+        public void ListPersons_with_limit_skip()
         {
             RapidTuxApiClient client = new RapidTuxApiClient(TestConfig.SvcUrl, TestConfig.APIID, "ex_tt");
             var resp = client.DataAPI.List(Person.PersonTypeName, 20, 0);
         }
 
         [TestMethod]
-        public void ListData_with_options()
+        public void SearchPersons_with_limit_skip()
         {
             RapidTuxApiClient client = new RapidTuxApiClient(TestConfig.SvcUrl, TestConfig.APIID, "ex_tt");
-            SearchOptions options = new SearchOptions();
+            SearchOptions options = SearchOptions.Instance;
             options.Limit = 20;
             options.Skip = 0;
             options.IsAndCriterias = false;
@@ -55,7 +67,7 @@ namespace RapidTux_Demo
         }
 
         [TestMethod]
-        public void DeleteData()
+        public void DeletePersons()
         {
             RapidTuxApiClient client = new RapidTuxApiClient(TestConfig.SvcUrl, TestConfig.APIID, "ex_tt");
             var resp = client.DataAPI.DeleteAll(Person.PersonTypeName);

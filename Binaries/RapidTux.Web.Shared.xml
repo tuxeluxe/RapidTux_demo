@@ -66,13 +66,64 @@
         </member>
         <member name="T:RapidTux.Web.Shared.Criteria">
             <summary>
-            A search criteria that can be used when getting a list of objects that matches the criteria
+            A search criteria that can be used for matching when querying a list of objects.
+            Match types: <see cref="T:RapidTux.Web.Shared.CriteriaTypeEnum"/>
             </summary>
         </member>
         <member name="F:RapidTux.Web.Shared.Criteria.CriteriaCollectionJsonName">
             <summary>
             Used in options JObject passed to data controller list method, to define the token name of a criteria collection.
             </summary>
+        </member>
+        <member name="M:RapidTux.Web.Shared.Criteria.#ctor">
+            <summary>
+            Default contructor.
+            </summary>
+        </member>
+        <member name="M:RapidTux.Web.Shared.Criteria.#ctor(RapidTux.Web.Shared.ObjectPath,Newtonsoft.Json.Linq.JValue,RapidTux.Web.Shared.CriteriaTypeEnum)">
+            <summary>
+            Constructor setting a path for which property the criteria operates on, as well as the criteria value and match type.
+            </summary>
+            <param name="path">A path for which property the criteria operates on.</param>
+            <param name="value">A value the criteria must match on a property.</param>
+            <param name="criteria">A match type.</param>
+        </member>
+        <member name="M:RapidTux.Web.Shared.Criteria.#ctor(System.String,Newtonsoft.Json.Linq.JValue,RapidTux.Web.Shared.CriteriaTypeEnum)">
+            <summary>
+            Constructor setting a path for which property the criteria operates on, as well as the criteria value and match type.
+            </summary>
+            <param name="path">A path for which property the criteria operates on.</param>
+            <param name="value">A value the criteria must match on a property.</param>
+            <param name="criteria">A match type.</param>
+        </member>
+        <member name="M:RapidTux.Web.Shared.Criteria.#ctor(RapidTux.Web.Shared.ObjectPath,Newtonsoft.Json.Linq.JArray,RapidTux.Web.Shared.CriteriaTypeEnum)">
+            <summary>
+            Constructor setting a path for which property the criteria operates on, as well as the criteria value and match type.
+            </summary>
+            <param name="path">A path for which property the criteria operates on.</param>
+            <param name="valueList">A list of values th criteria must match on.</param>
+            <param name="criteria">A match type.</param>
+        </member>
+        <member name="M:RapidTux.Web.Shared.Criteria.#ctor(System.String,Newtonsoft.Json.Linq.JArray,RapidTux.Web.Shared.CriteriaTypeEnum)">
+            <summary>
+            Constructor setting a path for which property the criteria operates on, as well as the criteria value and match type.
+            </summary>
+            <param name="path">A path for which property the criteria operates on.</param>
+            <param name="valueList">A list of values th criteria must match on.</param>
+            <param name="criteria">A match type.</param>
+        </member>
+        <member name="M:RapidTux.Web.Shared.Criteria.ToJObject">
+            <summary>
+            Translates the criteria to its json representation.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RapidTux.Web.Shared.Criteria.ToJObject(System.Collections.Generic.IEnumerable{RapidTux.Web.Shared.Criteria})">
+            <summary>
+            Translates a list of criterias to their json representation as a json array.
+            </summary>
+            <param name="criterias"></param>
+            <returns></returns>
         </member>
         <member name="P:RapidTux.Web.Shared.Criteria.Path">
             <summary>
@@ -99,7 +150,62 @@
         </member>
         <member name="T:RapidTux.Web.Shared.CriteriaTypeEnum">
             <summary>
-            Different types of match options.
+            Different types of match options used by criterias. <see cref="T:RapidTux.Web.Shared.Criteria"/> 
+            </summary>
+        </member>
+        <member name="F:RapidTux.Web.Shared.CriteriaTypeEnum.EQ">
+            <summary>
+            Equal.
+            </summary>
+        </member>
+        <member name="F:RapidTux.Web.Shared.CriteriaTypeEnum.NEQ">
+            <summary>
+            Not equal.
+            </summary>
+        </member>
+        <member name="F:RapidTux.Web.Shared.CriteriaTypeEnum.LT">
+            <summary>
+            Less than.
+            </summary>
+        </member>
+        <member name="F:RapidTux.Web.Shared.CriteriaTypeEnum.GT">
+            <summary>
+            Greater than.
+            </summary>
+        </member>
+        <member name="F:RapidTux.Web.Shared.CriteriaTypeEnum.LTE">
+            <summary>
+            Less than or equal.
+            </summary>
+        </member>
+        <member name="F:RapidTux.Web.Shared.CriteriaTypeEnum.GTE">
+            <summary>
+            Greater than or equal.
+            </summary>
+        </member>
+        <member name="F:RapidTux.Web.Shared.CriteriaTypeEnum.Contains">
+            <summary>
+            The matching value contains the criteria value.
+            </summary>
+        </member>
+        <member name="F:RapidTux.Web.Shared.CriteriaTypeEnum.StartsWith">
+            <summary>
+            The matching value starts with the criteria value.
+            </summary>
+        </member>
+        <member name="F:RapidTux.Web.Shared.CriteriaTypeEnum.EndsWith">
+            <summary>
+            The matching value ends with the criteria value.
+            </summary>
+        </member>
+        <member name="F:RapidTux.Web.Shared.CriteriaTypeEnum.In">
+            <summary>
+            The matching value must be one of the values supplied in an array.
+            </summary>
+        </member>
+        <member name="F:RapidTux.Web.Shared.CriteriaTypeEnum.NotSet">
+            <summary>
+            To indicate no criteria match type was initialised.
             </summary>
         </member>
         <member name="T:RapidTux.Web.Shared.DataCollection">
@@ -221,13 +327,23 @@
             <param name="propertyName">The name of the new property.</param>
             <returns>Returns the typebuilder</returns>
         </member>
+        <member name="M:RapidTux.Web.Shared.ITypeBuilder.AddObjectProperty(System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Adds a property of type object.
+            </summary>
+            <param name="propertyName">Name of property.</param>
+            <param name="objectName">Name of object type of property.</param>
+            <param name="withCreate">True to create an instance of the object for the property when creating its parent object, otherwise false.</param>
+            <param name="asArray">Create the property as an array of objects if true, otherwise false.</param>
+            <returns>Returns the current type builder instance with the newly added property.</returns>
+        </member>
         <member name="M:RapidTux.Web.Shared.ITypeBuilder.AddStringProperty(System.String,System.String)">
             <summary>
-            Adds a new property with he supplied name, of type string.
+            Adds a property of type string.
             </summary>
-            <param name="propertyName">The name of the new property.</param>
-            <param name="defaultValue">Optionally sets a default value of this property, to use when creating instances of this type.</param>
-            <returns>Returns the typebuilder</returns>
+            <param name="propertyName">Name of property.</param>
+            <param name="defaultValue">Default value of property when creating its parent object.</param>
+            <returns>Returns the current type builder instance with the newly added property.</returns>
         </member>
         <member name="M:RapidTux.Web.Shared.ITypeBuilder.ResultWithName(System.String)">
             <summary>
@@ -274,10 +390,54 @@
             Defines available tokens for use in querystrings when communicating with the REST api.
             </summary>
         </member>
+        <member name="F:RapidTux.Web.Shared.QueryStringTokens.LimitToken">
+            <summary>
+            A query string token for limiting number of results of a query.
+            </summary>
+        </member>
+        <member name="F:RapidTux.Web.Shared.QueryStringTokens.SkipToken">
+            <summary>
+            A query string token for skipping x number of results from a query.
+            </summary>
+        </member>
+        <member name="F:RapidTux.Web.Shared.QueryStringTokens.SortToken">
+            <summary>
+            Property path of property to sort on.
+            </summary>
+        </member>
+        <member name="F:RapidTux.Web.Shared.QueryStringTokens.PathToken">
+            <summary>
+            Property path of a property whose value will be matched against a single criteria.
+            </summary>
+        </member>
+        <member name="F:RapidTux.Web.Shared.QueryStringTokens.MatchTypeToken">
+            <summary>
+            How a single criteria should be matched, <see cref="T:RapidTux.Web.Shared.CriteriaTypeEnum"/>
+            </summary>
+        </member>
+        <member name="F:RapidTux.Web.Shared.QueryStringTokens.ValueToken">
+            <summary>
+            The value to match for a single criteria.
+            </summary>
+        </member>
         <member name="F:RapidTux.Web.Shared.QueryStringTokens.LogicalCriteriaToken">
             <summary>
             Defines whether criterias should be executed as logical AND or Logical OR.
             </summary>
+        </member>
+        <member name="M:RapidTux.Web.Shared.QueryStringTokens.IsValidCriteriaType(System.String)">
+            <summary>
+            Checks whether the match type in the literal string is a valid known match type
+            </summary>
+            <param name="matchType">Match type as a string literal.</param>
+            <returns>True if valid, otherwise false.</returns>
+        </member>
+        <member name="M:RapidTux.Web.Shared.QueryStringTokens.CriteriaTypeFromTokenString(System.String)">
+            <summary>
+            Maps a criteria matc type literal sting to <see cref="T:RapidTux.Web.Shared.CriteriaTypeEnum"/>
+            </summary>
+            <param name="criteriaType"></param>
+            <returns></returns>
         </member>
         <member name="T:RapidTux.Web.Shared.SearchOptions">
             <summary>
@@ -285,11 +445,25 @@
             todo: add sort to the options object
             </summary>
         </member>
+        <member name="M:RapidTux.Web.Shared.SearchOptions.AddCriteria(System.String,System.String,RapidTux.Web.Shared.CriteriaTypeEnum)">
+            <summary>
+            Adds a criteria to the search options.
+            </summary>
+            <param name="path">A path for which property the criteria operates on.</param>
+            <param name="value">A value the criteria must match on a property.</param>
+            <param name="matchType">A match type.</param>
+            <returns>Returns the SearchOptions instance with the criteria added.</returns>
+        </member>
         <member name="M:RapidTux.Web.Shared.SearchOptions.ToJsonOptions">
             <summary>
             Return the options as json to pass along to the REST api.
             </summary>
             <returns></returns>
+        </member>
+        <member name="P:RapidTux.Web.Shared.SearchOptions.Instance">
+            <summary>
+            Creates a new SearchOptions instance.
+            </summary>
         </member>
         <member name="P:RapidTux.Web.Shared.SearchOptions.IsAndCriterias">
             <summary>
@@ -335,12 +509,25 @@
             e.g. new TypeBuilder().AddProperty().AddProperty.Result
             </summary>
         </member>
+        <member name="M:RapidTux.Web.Shared.TypeBuilder.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
         <member name="M:RapidTux.Web.Shared.TypeBuilder.ResultWithName(System.String)">
             <summary>
             Returns the build data type as an IDataType and names the datatype with name.
             </summary>
             <param name="name">Name to give to the datatype.</param>
             <returns>Returns the build data type.</returns>
+        </member>
+        <member name="M:RapidTux.Web.Shared.TypeBuilder.AddProperty(System.String,Newtonsoft.Json.Linq.JObject)">
+            <summary>
+            Adds a property, type inferred from defaultvalue.
+            </summary>
+            <param name="propertyName"></param>
+            <param name="defaultValue"></param>
+            <returns></returns>
         </member>
         <member name="M:RapidTux.Web.Shared.TypeBuilder.AddStringProperty(System.String,System.String)">
             <summary>
