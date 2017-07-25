@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RapidTux.ApiClient;
 using Newtonsoft.Json.Linq;
@@ -14,15 +15,16 @@ namespace RapidTux_Demo
         public void ListPersons()
         {
             RapidTuxApiClient client = new RapidTuxApiClient(TestConfig.SvcUrl, TestConfig.APIID, "ex_tt");
-            var persons = client.DataAPI.List(Person.PersonTypeName).Value.Data;
+            var resp = client.DataAPI.List(Person.PersonTypeName);
+            List<JObject> persons = resp.Value.Data.ToList();
         }
 
         [TestMethod]
         public void SearchPersons()
         {
             RapidTuxApiClient client = new RapidTuxApiClient(TestConfig.SvcUrl, TestConfig.APIID, "ex_tt");
-            var search = SearchOptions.Instance.AddCriteria("navn", "Mogensen", CriteriaTypeEnum.Contains);
-            var persons = client.DataAPI.List(Person.PersonTypeName, search).Value.Data;
+            var search = SearchOptions.Instance.AddCriteria(Person.NavnProperty, "Mogensen", CriteriaTypeEnum.Contains);
+            var persons = client.DataAPI.List(Person.PersonTypeName, search).Value.Data.ToList();
         }
 
         [TestMethod]
@@ -52,18 +54,20 @@ namespace RapidTux_Demo
         {
             RapidTuxApiClient client = new RapidTuxApiClient(TestConfig.SvcUrl, TestConfig.APIID, "ex_tt");
             var resp = client.DataAPI.List(Person.PersonTypeName, 20, 0);
+            List<JObject> persons = resp.Value.Data.ToList();
         }
 
         [TestMethod]
         public void SearchPersons_with_limit_skip()
         {
             RapidTuxApiClient client = new RapidTuxApiClient(TestConfig.SvcUrl, TestConfig.APIID, "ex_tt");
-            SearchOptions options = SearchOptions.Instance;
-            options.Limit = 20;
-            options.Skip = 0;
-            options.IsAndCriterias = false;
-            options.AddCriteria(new Criteria(Person.NavnProperty, new JValue("Mogensen"), CriteriaTypeEnum.Contains));
+            SearchOptions options = SearchOptions.Instance
+                                                 .WithLimit(20)
+                                                 .WithSkip(0)
+                                                 .AsOr
+                                                 .AddCriteria(new Criteria(Person.NavnProperty, new JValue("Mogensen"), CriteriaTypeEnum.Contains));
             var resp = client.DataAPI.List(Person.PersonTypeName, options);
+            List<JObject> persons = resp.Value.Data.ToList();
         }
 
         [TestMethod]

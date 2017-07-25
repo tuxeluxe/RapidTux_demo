@@ -441,9 +441,23 @@
         </member>
         <member name="T:RapidTux.Web.Shared.SearchOptions">
             <summary>
-            Construction of search options and translator to json options.
+            Immutable class for construction of search options and translator to json options.
             todo: add sort to the options object
             </summary>
+        </member>
+        <member name="M:RapidTux.Web.Shared.SearchOptions.WithLimit(System.Nullable{System.Int32})">
+            <summary>
+            Limit result set to a certain number of items.
+            </summary>
+            <param name="limit"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RapidTux.Web.Shared.SearchOptions.WithSkip(System.Nullable{System.Int32})">
+            <summary>
+            Skip x number of items from the result set.
+            </summary>
+            <param name="skip"></param>
+            <returns></returns>
         </member>
         <member name="M:RapidTux.Web.Shared.SearchOptions.AddCriteria(System.String,System.String,RapidTux.Web.Shared.CriteriaTypeEnum)">
             <summary>
@@ -475,11 +489,13 @@
         <member name="P:RapidTux.Web.Shared.SearchOptions.Limit">
             <summary>
             Limit result set to a certain number of items.
+            To set the limit use WithLimit()
             </summary>
         </member>
         <member name="P:RapidTux.Web.Shared.SearchOptions.Skip">
             <summary>
             Skip x number of items from the result set.
+            To set the skip count use WithSkip()
             </summary>
         </member>
         <member name="P:RapidTux.Web.Shared.SearchOptions.Criterias">
