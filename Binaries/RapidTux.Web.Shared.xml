@@ -530,6 +530,25 @@
             Default constructor.
             </summary>
         </member>
+        <member name="M:RapidTux.Web.Shared.TypeBuilder.#ctor(Newtonsoft.Json.Linq.JObject)">
+            <summary>
+            Constructs the type builder based on an existing type template.
+            </summary>
+            <param name="typeTemplate">Existing type template that the type builder must be based on.</param>
+        </member>
+        <member name="M:RapidTux.Web.Shared.TypeBuilder.Create">
+            <summary>
+            Creates a new type builder.
+            </summary>
+            <returns>Returns an instance of a type builder.</returns>
+        </member>
+        <member name="M:RapidTux.Web.Shared.TypeBuilder.FromTemplate(Newtonsoft.Json.Linq.JObject)">
+            <summary>
+            Constructs the type builder based on an existing type template.
+            </summary>
+            <param name="typeTemplate">Existing type template that the type builder must be based on.</param>
+            <returns>Returns the constructed type builder.</returns>
+        </member>
         <member name="M:RapidTux.Web.Shared.TypeBuilder.ResultWithName(System.String)">
             <summary>
             Returns the build data type as an IDataType and names the datatype with name.
@@ -566,6 +585,11 @@
         <member name="P:RapidTux.Web.Shared.TypeBuilder.New">
             <summary>
             Resets the type builder and creates a completely new type
+            </summary>
+        </member>
+        <member name="P:RapidTux.Web.Shared.TypeBuilder.Result">
+            <summary>
+            Returns the resulting type template.
             </summary>
         </member>
         <member name="M:RapidTux.Web.Shared.TypeMarkers.GetMarkerForObject(System.String,System.Boolean,System.Boolean)">

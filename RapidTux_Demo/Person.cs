@@ -11,11 +11,11 @@ namespace RapidTux_Demo
         public const string PersonTypeName = "Person";
 
         public const string IdProperty = "_id";
-        public const string NavnProperty = "navn";
-        public const string AlderProperty = "alder";
+        public const string NameProperty = "name";
+        public const string AgeProperty = "age";
         public const string EmailProperty = "email";
-        public const string ErÆgtefælleProperty = "ErÆgtefælle";
-        public const string ErBarnProperty = "ErBarn";
-        public const string RelationerProperty = "Relationer";
+        public const string IsSpouseProperty = "isSpouse";
+        public const string IsChildProperty = "isChild";
+        public const string RelationsProperty = "relations";
     }
 }

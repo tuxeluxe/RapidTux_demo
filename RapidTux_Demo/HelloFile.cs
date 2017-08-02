@@ -16,7 +16,7 @@ namespace RapidTux_Demo
         [TestMethod]
         public void Upload()
         {
-            RapidTuxApiClient client = new RapidTuxApiClient(TestConfig.SvcUrl, TestConfig.APIID, "ex_tt");
+            RapidTuxApiClient client = new RapidTuxApiClient(TestConfig.SvcUrl, TestConfig.APIID, TestConfig.Username);
             byte[] fileBytes = Encoding.UTF8.GetBytes("Content of the text file");
             var resp = client.FileAPI.Upload("leBuck", "myFile.txt", MimeMapper.GetMimeType("txt"), fileBytes);
             IFile fileUploadResult = resp.Value;
@@ -25,7 +25,7 @@ namespace RapidTux_Demo
         [TestMethod]
         public void Download()
         {
-            RapidTuxApiClient client = new RapidTuxApiClient(TestConfig.SvcUrl, TestConfig.APIID, "ex_tt");
+            RapidTuxApiClient client = new RapidTuxApiClient(TestConfig.SvcUrl, TestConfig.APIID, TestConfig.Username);
             var resp = client.FileAPI.Download("leBuck", "myFile.txt");
             IFile fileDownloadResult = resp.Value;
             string fileContents = Encoding.UTF8.GetString(fileDownloadResult.FileBytes);
