@@ -18,4 +18,4 @@ Files are uploaded to buckets that acts like a directory. Inside the bucket the 
 
 **Config API**
 ----
-Set up your application configuration
+Set up your application configuration using the Config API.
