@@ -343,6 +343,20 @@
             An API for the type system.
             </summary>
         </member>
+        <member name="M:RapidTux.ApiClient.ITypeAPI.Create(RapidTux.Web.Shared.IDataType)">
+            <summary>
+            Creates a new type. if the type allready exists in the type system an HTTP 309 - Conflict will be returned.
+            </summary>
+            <param name="typeContent"></param>
+            <returns>Returns an APIResponse with Http 200 if OK, or Http 409 - conflict if type already exists.</returns>
+        </member>
+        <member name="M:RapidTux.ApiClient.ITypeAPI.CreateAsync(RapidTux.Web.Shared.IDataType)">
+            <summary>
+            Creates a new type. if the type allready exists in the type system an HTTP 309 - Conflict will be returned.
+            </summary>
+            <param name="typeContent"></param>
+            <returns>Returns an APIResponse with Http 200 if OK, or Http 409 - conflict if type already exists.</returns>
+        </member>
         <member name="M:RapidTux.ApiClient.RequestMakerFactory.Create(System.String,System.String)">
             <summary>
             Creates an instace of RequestMakerGeneric, and sets default tux api http headers for api id and user id
@@ -409,6 +423,20 @@
             <summary>
             An API for uploading and downloading any byte stream and associated metadata.
             </summary>
+        </member>
+        <member name="M:RapidTux.ApiClient.TypeAPI.Delete(System.String)">
+            <summary>
+            Delete a type and all data instances of that type.
+            </summary>
+            <param name="dataTypeName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RapidTux.ApiClient.TypeAPI.DeleteAsync(System.String)">
+            <summary>
+            Delete a type and all data instances of that type.
+            </summary>
+            <param name="dataTypeName"></param>
+            <returns></returns>
         </member>
     </members>
 </doc>

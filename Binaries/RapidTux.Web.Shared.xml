@@ -242,25 +242,33 @@
         </member>
         <member name="P:RapidTux.Web.Shared.IDataType.Name">
             <summary>
-            Name of type
+            Name of the type.
             </summary>
         </member>
         <member name="P:RapidTux.Web.Shared.IDataType.TypeInfo">
             <summary>
-            Template data for data type
+            Template data for the data type.
             </summary>
         </member>
-        <member name="M:RapidTux.Web.Shared.DataType.#ctor">
+        <member name="P:RapidTux.Web.Shared.IDataType.ChangeInfo">
             <summary>
-            Default constructor
+            The changes that has been made to the type, properties added / removed and so on.
             </summary>
         </member>
         <member name="M:RapidTux.Web.Shared.DataType.#ctor(System.String,Newtonsoft.Json.Linq.JObject)">
             <summary>
-            Initialising constructor.
+            Constructor
             </summary>
-            <param name="name"></param>
-            <param name="typeInfo"></param>
+            <param name="name">Name of data type</param>
+            <param name="typeInfo">Type info</param>
+        </member>
+        <member name="M:RapidTux.Web.Shared.DataType.#ctor(System.String,Newtonsoft.Json.Linq.JObject,Newtonsoft.Json.Linq.JObject)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="name">Name of data type</param>
+            <param name="typeInfo">Type info</param>
+            <param name="changeInfo">Change info, as per changes made to a type using the <see cref="T:RapidTux.Web.Shared.TypeBuilder"/></param>
         </member>
         <member name="P:RapidTux.Web.Shared.DataType.Name">
             <summary>
@@ -270,6 +278,11 @@
         <member name="P:RapidTux.Web.Shared.DataType.TypeInfo">
             <summary>
             Template data for object
+            </summary>
+        </member>
+        <member name="P:RapidTux.Web.Shared.DataType.ChangeInfo">
+            <summary>
+            The changes that has been made to the type, properties added / removed and so on.
             </summary>
         </member>
         <member name="T:RapidTux.Web.Shared.DataTypeCollection">
@@ -345,6 +358,21 @@
             <param name="defaultValue">Default value of property when creating its parent object.</param>
             <returns>Returns the current type builder instance with the newly added property.</returns>
         </member>
+        <member name="M:RapidTux.Web.Shared.ITypeBuilder.RemoveProperty(System.String)">
+            <summary>
+            Removes a property.
+            </summary>
+            <param name="propertyName">The name of the property to remove.</param>
+            <returns>Returns the current type builder instance, with the property removed.</returns>
+        </member>
+        <member name="M:RapidTux.Web.Shared.ITypeBuilder.RenameProperty(System.String,System.String)">
+            <summary>
+            Renames a property.
+            </summary>
+            <param name="propertyName">Current property name.</param>
+            <param name="newPropertyName">New property name to use.</param>
+            <returns>Returns the current type builder instance, with the property renamed.</returns>
+        </member>
         <member name="M:RapidTux.Web.Shared.ITypeBuilder.ResultWithName(System.String)">
             <summary>
             Returns the type info for the type that was build, and sets the type name.
@@ -357,10 +385,27 @@
             Creates a new type instance to work on.
             </summary>
         </member>
-        <member name="P:RapidTux.Web.Shared.ITypeBuilder.Result">
+        <member name="P:RapidTux.Web.Shared.ITypeBuilder.TypeTemplate">
             <summary>
             Returns the template for the type that was build without specifying a name for the type
             </summary>
+        </member>
+        <member name="P:RapidTux.Web.Shared.ITypeBuilder.TypeChanges">
+            <summary>
+            Returns the changes made to the type as json.
+            </summary>
+        </member>
+        <member name="P:RapidTux.Web.Shared.ITypeBuilder.Result">
+            <summary>
+            Returns the constructed data type as an IDataType, using whatever name was supplied for the type, when typebuilder was created.
+            </summary>
+        </member>
+        <member name="M:RapidTux.Web.Shared.JsonTypeUtil.HasSameProperties(Newtonsoft.Json.Linq.JObject,Newtonsoft.Json.Linq.JObject)">
+            <summary>
+            Examines objects root properties, and check if they match.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
         </member>
         <member name="M:RapidTux.Web.Shared.MimeMapper.GetMimeType(System.String)">
             <summary>
@@ -521,7 +566,7 @@
         </member>
         <member name="T:RapidTux.Web.Shared.TypeBuilder">
             <summary>
-             A fluent interface for building and changing types defined by IDataType.
+             A fluent class for building and changing types defined by IDataType.
             e.g. new TypeBuilder().AddProperty().AddProperty.Result
             </summary>
         </member>
@@ -530,11 +575,24 @@
             Default constructor.
             </summary>
         </member>
+        <member name="M:RapidTux.Web.Shared.TypeBuilder.#ctor(System.String)">
+            <summary>
+            Constructs a type builder and names the type with name.
+            </summary>
+            <param name="name"></param>
+        </member>
         <member name="M:RapidTux.Web.Shared.TypeBuilder.#ctor(Newtonsoft.Json.Linq.JObject)">
             <summary>
             Constructs the type builder based on an existing type template.
             </summary>
             <param name="typeTemplate">Existing type template that the type builder must be based on.</param>
+        </member>
+        <member name="M:RapidTux.Web.Shared.TypeBuilder.#ctor(System.String,Newtonsoft.Json.Linq.JObject)">
+            <summary>
+            Constructs the type builder based on an existing type template, and names the type with name.
+            </summary>
+            <param name="name"></param>
+            <param name="typeTemplate"></param>
         </member>
         <member name="M:RapidTux.Web.Shared.TypeBuilder.Create">
             <summary>
@@ -542,16 +600,31 @@
             </summary>
             <returns>Returns an instance of a type builder.</returns>
         </member>
-        <member name="M:RapidTux.Web.Shared.TypeBuilder.FromTemplate(Newtonsoft.Json.Linq.JObject)">
+        <member name="M:RapidTux.Web.Shared.TypeBuilder.Create(System.String)">
+            <summary>
+            Creates a new type builder and names the type with name.
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RapidTux.Web.Shared.TypeBuilder.Create(Newtonsoft.Json.Linq.JObject)">
             <summary>
             Constructs the type builder based on an existing type template.
             </summary>
             <param name="typeTemplate">Existing type template that the type builder must be based on.</param>
             <returns>Returns the constructed type builder.</returns>
         </member>
+        <member name="M:RapidTux.Web.Shared.TypeBuilder.Create(System.String,Newtonsoft.Json.Linq.JObject)">
+            <summary>
+            Constructs the type builder based on an existing type template, and names the type with name.
+            </summary>
+            <param name="name"></param>
+            <param name="typeTemplate"></param>
+            <returns></returns>
+        </member>
         <member name="M:RapidTux.Web.Shared.TypeBuilder.ResultWithName(System.String)">
             <summary>
-            Returns the build data type as an IDataType and names the datatype with name.
+            Returns the constructed data type as an IDataType and names the datatype with name.
             </summary>
             <param name="name">Name to give to the datatype.</param>
             <returns>Returns the build data type.</returns>
@@ -572,6 +645,13 @@
             <param name="defaultValue">Default value of property when creating its parent object.</param>
             <returns>Returns the current type builder instance with the newly added property.</returns>
         </member>
+        <member name="M:RapidTux.Web.Shared.TypeBuilder.AddArrayOfStringProperty(System.String)">
+            <summary>
+            Adds an array of strings.
+            </summary>
+            <param name="propertyName">Name of property.</param>
+            <returns>eturns the current type builder instance with the newly added property.</returns>
+        </member>
         <member name="M:RapidTux.Web.Shared.TypeBuilder.AddObjectProperty(System.String,System.String,System.Boolean,System.Boolean)">
             <summary>
             Adds a property of type object.
@@ -582,14 +662,85 @@
             <param name="asArray">Create the property as an array of objects if true, otherwise false.</param>
             <returns>Returns the current type builder instance with the newly added property.</returns>
         </member>
+        <member name="M:RapidTux.Web.Shared.TypeBuilder.RemoveProperty(System.String)">
+            <summary>
+            Removes a property.
+            </summary>
+            <param name="propertyName">The name of the property to remove.</param>
+            <returns>Returns the current type builder instance, with the property removed.</returns>
+        </member>
+        <member name="M:RapidTux.Web.Shared.TypeBuilder.RenameProperty(System.String,System.String)">
+            <summary>
+            Renames a property.
+            </summary>
+            <param name="propertyName">Current property name.</param>
+            <param name="newPropertyName">New property name to use.</param>
+            <returns>Returns the current type builder instance, with the property renamed.</returns>
+        </member>
         <member name="P:RapidTux.Web.Shared.TypeBuilder.New">
             <summary>
-            Resets the type builder and creates a completely new type
+            Resets the type builder andits name and prepares for construction of a new type, with the same type builder instance.
+            </summary>
+        </member>
+        <member name="P:RapidTux.Web.Shared.TypeBuilder.TypeTemplate">
+            <summary>
+            Returns the resulting type template.
+            </summary>
+        </member>
+        <member name="P:RapidTux.Web.Shared.TypeBuilder.TypeChanges">
+            <summary>
+            Returns the changes made to the type as json.
             </summary>
         </member>
         <member name="P:RapidTux.Web.Shared.TypeBuilder.Result">
             <summary>
-            Returns the resulting type template.
+            Returns the constructed data type as an IDataType, using whatever name was supplied for the type, when typebuilder was created.
+            </summary>
+        </member>
+        <member name="T:RapidTux.Web.Shared.TypeChange">
+            <summary>
+            A record of a single change to a type, used by the <see cref="T:RapidTux.Web.Shared.TypeBuilder"/>
+            </summary>
+        </member>
+        <member name="M:RapidTux.Web.Shared.TypeChange.ToJson">
+            <summary>
+            Transform the TypeChange instance to its json form.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RapidTux.Web.Shared.TypeChange.FromJson(System.String)">
+            <summary>
+            Create a TypeChange instance from json.
+            </summary>
+            <param name="typeChangeJson"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RapidTux.Web.Shared.TypeChange.FromJson(Newtonsoft.Json.Linq.JObject)">
+            <summary>
+            Create a TypeChange instance from json.
+            </summary>
+            <param name="typeChangeJson"></param>
+            <returns></returns>
+        </member>
+        <member name="T:RapidTux.Web.Shared.TypeChangeCollection">
+            <summary>
+            Tracks changes to data types, done using the <see cref="T:RapidTux.Web.Shared.TypeBuilder"/>
+            </summary>
+        </member>
+        <member name="F:RapidTux.Web.Shared.TypeChangeCollection.ChangesPropertyJsonName">
+            <summary>
+            The json property name for the changes array.
+            </summary>
+        </member>
+        <member name="M:RapidTux.Web.Shared.TypeChangeCollection.ToJson">
+            <summary>
+            Returns the changes as a json object.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:RapidTux.Web.Shared.Change">
+            <summary>
+            Possible types of changes to a type.
             </summary>
         </member>
         <member name="M:RapidTux.Web.Shared.TypeMarkers.GetMarkerForObject(System.String,System.Boolean,System.Boolean)">
